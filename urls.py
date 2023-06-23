@@ -1,15 +1,11 @@
 # Importing Third Party Packages
 
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
-# Local Imports
-
-from .views import about, home, details
-
-# Url Patterns Registration
+# URL Pattern Base (Extended in weather_details.urls)
 
 urlpatterns = [
-    path('about/', about, name='about'),
-    path('', home, name='home'),
-    path('details/', details, name='details'),
-]
+    path('', include('weather_details.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
